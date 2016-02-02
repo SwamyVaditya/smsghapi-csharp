@@ -64,7 +64,16 @@ namespace smsghapi_dotnet_v2.Smsgh
         }
 
         /// <summary>
-        ///     Schedule a message. It returns upon success a <see cref="MessageResponse" /> object.
+        /// Schedule a message. It returns upon success a <see cref="MessageResponse"/> object.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns><see cref="MessageResponse" /></returns>
+        public MessageResponse ScheduleMessage(Message message) {
+            return SendMessage(message);
+        }
+
+        /// <summary>
+        ///     Reschedule a message. It returns upon success a <see cref="MessageResponse" /> object.
         /// </summary>
         /// <param name="messageId">Message Id</param>
         /// <param name="time">Schedule Time</param>
@@ -85,7 +94,7 @@ namespace smsghapi_dotnet_v2.Smsgh
         }
 
         /// <summary>
-        ///     Schedule a message. It returns upon success a <see cref="MessageResponse" /> object.
+        ///     Reschedule a message. It returns upon success a <see cref="MessageResponse" /> object.
         /// </summary>
         /// <param name="messageId">Message Id</param>
         /// <param name="time">Schedule Time</param>
