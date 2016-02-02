@@ -83,12 +83,15 @@ The SDK currently is organized around four main classes:
             try {
                 var host = new ApiHost(new BasicAuth(clientId, clientSecret));
 
-                var messageApi = new MessagingApi(host);
-				const string messageId = "9327e44b281049f090fcae3ebbccb883";
-                // The message will be sent four days from today
-                DateTime sendTime = DateTime.UtcNow.AddDays(4);
+                // scheduling message from 4 days from now.
+                Message message = new Message {
+                    From = "wazza",
+                    To = "+233246876456",
+                    Content = "I am scheduling this message",
+                    Time = DateTime.UtcNow.AddDays(4)
+                };
+                messageApi.SendMessage(message);
 
-                MessageResponse msg = messageApi.ScheduleMessage(messageId, sendTime);
                 Console.WriteLine(msg.Status);
             }
             catch (Exception e) {
