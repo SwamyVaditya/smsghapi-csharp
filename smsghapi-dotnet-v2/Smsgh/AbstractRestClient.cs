@@ -76,7 +76,7 @@ namespace smsghapi_dotnet_v2.Smsgh
                 PrepareConnection(urlConnection, httpMethod, contentType, accept);
                 AppendRequestHeaders(urlConnection);
                 Connected = true;
-                if (RequestLogger.IsLoggingEnabled()) RequestLogger.LogRequest(urlConnection, HttpUtility.HtmlDecode(Encoding.UTF8.GetString(content)));
+                if (RequestLogger.IsLoggingEnabled() && content != null) RequestLogger.LogRequest(urlConnection, HttpUtility.HtmlDecode(Encoding.UTF8.GetString(content)));
 
                 // Write the request
                 if (content != null) {
