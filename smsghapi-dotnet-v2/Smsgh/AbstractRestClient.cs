@@ -36,20 +36,20 @@ namespace smsghapi_dotnet_v2.Smsgh
         ///     Constructs a client with empty baseUrl. Prevent sub-classes from calling
         ///     this as it doesn't result in an instance of the subclass
         /// </summary>
-        protected AbstractRestClient() : this("") {}
+        protected AbstractRestClient() : this("") { }
 
         /// <summary>
         ///     Constructs a new client with base URL that will be appended in the request methods.
         /// </summary>
         /// <param name="baseUrl">Base Url</param>
-        protected AbstractRestClient(string baseUrl) : this(baseUrl, new BasicRequestHandler()) {}
+        protected AbstractRestClient(string baseUrl) : this(baseUrl, new BasicRequestHandler()) { }
 
         /// <summary>
         ///     Construct a client with baseUrl and RequestHandler.
         /// </summary>
         /// <param name="baseUrl">Base Url</param>
         /// <param name="requestHandler">Request Handler</param>
-        protected AbstractRestClient(string baseUrl, IRequestHandler requestHandler) : this(baseUrl, requestHandler, new ConsoleRequestLogger(true)) {}
+        protected AbstractRestClient(string baseUrl, IRequestHandler requestHandler) : this(baseUrl, requestHandler, new ConsoleRequestLogger(true)) { }
 
         #region Http Client Methods that drives the Web Requests
 
@@ -69,7 +69,8 @@ namespace smsghapi_dotnet_v2.Smsgh
         protected HttpResponse DoHttpMethod(string path, string httpMethod, string contentType, string accept, byte[] content)
         {
             HttpResponse response = null;
-            try {
+            try
+            {
                 Connected = false;
                 // Let us open the connection, prepare it for writing and reading data.
                 HttpWebRequest urlConnection = OpenConnection(path);
@@ -79,7 +80,8 @@ namespace smsghapi_dotnet_v2.Smsgh
                 if (RequestLogger.IsLoggingEnabled() && content != null) RequestLogger.LogRequest(urlConnection, HttpUtility.HtmlDecode(Encoding.UTF8.GetString(content)));
 
                 // Write the request
-                if (content != null) {
+                if (content != null)
+                {
                     urlConnection.ContentLength = content.Length;
                     WriteOutptStream(urlConnection, content);
                 }
@@ -87,15 +89,21 @@ namespace smsghapi_dotnet_v2.Smsgh
                 //Let us read the response
 
                 // Get the server response
-                using (var serverResponse = urlConnection.GetResponse() as HttpWebResponse) {
-                    if (serverResponse != null) {
-                        using (Stream inputStream = RequestHandler.OpenInput(urlConnection)) {
-                            if (inputStream != null) {
-                                if (serverResponse.ContentLength > 0) {
+                using (var serverResponse = urlConnection.GetResponse() as HttpWebResponse)
+                {
+                    if (serverResponse != null)
+                    {
+                        using (Stream inputStream = RequestHandler.OpenInput(urlConnection))
+                        {
+                            if (inputStream != null)
+                            {
+                                if (serverResponse.ContentLength > 0)
+                                {
                                     var buffer = new byte[serverResponse.ContentLength];
                                     int bytesRead = 0;
                                     int totalBytesRead = bytesRead;
-                                    while (totalBytesRead < buffer.Length) {
+                                    while (totalBytesRead < buffer.Length)
+                                    {
                                         bytesRead = inputStream.Read(buffer, bytesRead, buffer.Length - bytesRead);
                                         totalBytesRead += bytesRead;
                                     }
@@ -108,29 +116,30 @@ namespace smsghapi_dotnet_v2.Smsgh
                 }
                 return response;
             }
-            catch (Exception e) {
-                if (e.GetType() == typeof (WebException)) {
+            catch (Exception e)
+            {
+                if (e.GetType() == typeof(WebException))
+                {
                     var ex = e as WebException;
                     try { response = ReadStreamError(ex); }
-                    catch (Exception ee) {
+                    catch (Exception ee)
+                    {
                         // Must catch IOException, but swallow to show first cause only
                         RequestLogger.Log(ee.StackTrace);
-                    }
-                    finally {
-                        if (response == null
-                            || response.Status <= 0)
-                            throw new HttpRequestException(e, response);
+                        throw new HttpRequestException(ee, null);
                     }
                 }
                 else {
                     // Different Exception 
                     // Must catch IOException, but swallow to show first cause only
                     RequestLogger.Log(e.ToString());
+                    throw new HttpRequestException(e, null);
                 }
             }
-            finally {
+            finally
+            {
                 // Here we log the Http Response
-                if (RequestLogger.IsLoggingEnabled()) RequestLogger.LogResponse(response);
+                if (RequestLogger.IsLoggingEnabled() && response != null) RequestLogger.LogResponse(response);
             }
             return response;
         }
@@ -147,14 +156,15 @@ namespace smsghapi_dotnet_v2.Smsgh
         public HttpResponse PostFiles(string path, UploadFile[] uploadFiles, ParameterMap parameters)
         {
             HttpResponse response = null;
-            try {
+            try
+            {
                 Connected = false;
                 // Let us open the connection, prepare it for writing and reading data.
                 HttpWebRequest urlConnection = OpenConnection(path);
                 urlConnection.Accept = Accept;
                 urlConnection.KeepAlive = true;
-                urlConnection.ReadWriteTimeout = ReadWriteTimeout*1000;
-                urlConnection.Timeout = ConnectionTimeout*1000;
+                urlConnection.ReadWriteTimeout = ReadWriteTimeout * 1000;
+                urlConnection.Timeout = ConnectionTimeout * 1000;
                 urlConnection.Method = "POST";
                 urlConnection.Headers.Add("Accept-Charset", "UTF-8");
                 AppendRequestHeaders(urlConnection);
@@ -166,14 +176,19 @@ namespace smsghapi_dotnet_v2.Smsgh
 
                 // upload the files
                 HttpWebResponse resp = HttpUploadHelper.Upload(urlConnection, uploadFiles, form);
-                using (resp) {
-                    if (resp != null) {
-                        using (Stream inputStream = resp.GetResponseStream()) {
-                            if (inputStream != null) {
+                using (resp)
+                {
+                    if (resp != null)
+                    {
+                        using (Stream inputStream = resp.GetResponseStream())
+                        {
+                            if (inputStream != null)
+                            {
                                 var buffer = new byte[resp.ContentLength];
                                 int bytesRead = 0;
                                 int totalBytesRead = bytesRead;
-                                while (totalBytesRead < buffer.Length) {
+                                while (totalBytesRead < buffer.Length)
+                                {
                                     bytesRead = inputStream.Read(buffer, bytesRead, buffer.Length - bytesRead);
                                     totalBytesRead += bytesRead;
                                 }
@@ -184,15 +199,19 @@ namespace smsghapi_dotnet_v2.Smsgh
                 }
                 return response;
             }
-            catch (Exception e) {
-                if (e.GetType() == typeof (WebException)) {
+            catch (Exception e)
+            {
+                if (e.GetType() == typeof(WebException))
+                {
                     var ex = e as WebException;
                     try { response = ReadStreamError(ex); }
-                    catch (Exception ee) {
+                    catch (Exception ee)
+                    {
                         // Must catch IOException, but swallow to show first cause only
                         RequestLogger.Log(ee.StackTrace);
                     }
-                    finally {
+                    finally
+                    {
                         if (response == null
                             || response.Status <= 0)
                             throw new HttpRequestException(e, response);
@@ -204,7 +223,8 @@ namespace smsghapi_dotnet_v2.Smsgh
                     RequestLogger.Log(e.ToString());
                 }
             }
-            finally {
+            finally
+            {
                 // Here we log the Http Response
                 if (RequestLogger.IsLoggingEnabled()) RequestLogger.LogResponse(response);
             }
@@ -222,10 +242,12 @@ namespace smsghapi_dotnet_v2.Smsgh
         {
             HttpResponse httpResponse = null;
             try { httpResponse = DoHttpMethod(httpRequest.Path, httpRequest.HttpMethod, httpRequest.ContentType, Accept, httpRequest.Content); }
-            catch (HttpRequestException hre) {
+            catch (HttpRequestException hre)
+            {
                 RequestHandler.OnError(hre);
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 RequestHandler.OnError(new HttpRequestException(e, httpResponse));
             }
             return httpResponse;
@@ -244,7 +266,8 @@ namespace smsghapi_dotnet_v2.Smsgh
         {
             string requestUrl = BaseUrl + path;
             try { var uri = new Uri(requestUrl); }
-            catch (UriFormatException e) {
+            catch (UriFormatException e)
+            {
                 throw new ArgumentException(requestUrl + " is not a valid URL", e);
             }
             return RequestHandler.OpenConnection(requestUrl);
@@ -286,26 +309,30 @@ namespace smsghapi_dotnet_v2.Smsgh
         /// <returns>HttpResponse, may be null</returns>
         protected HttpResponse ReadStreamError(WebException ex)
         {
-            if (ex.Response.GetResponseStream() == null) return null;
-            using (var response = ex.Response as HttpWebResponse) {
-                if (response == null) return null;
-                using (Stream stream = ex.Response.GetResponseStream()) {
-                    if (stream == null) return null;
-                    var buffer = new byte[response.ContentLength];
-                    int bytesRead = 0;
-                    int totalBytesRead = bytesRead;
-                    while (totalBytesRead < buffer.Length) {
-                        bytesRead = stream.Read(buffer, bytesRead, buffer.Length - bytesRead);
-                        totalBytesRead += bytesRead;
+            var status = ex.Status;
+            HttpResponse resp = null;
+            switch (status)
+            {
+                case WebExceptionStatus.ProtocolError:
+                    if (ex.Response.GetResponseStream() == null) return null;
+                    using (var response = ex.Response as HttpWebResponse)
+                    {
+                        if (response == null) return null;
+                        using (var stream = ex.Response.GetResponseStream())
+                        {
+                            if (stream == null) return null;
+                            using (var sr = new StreamReader(stream))
+                            {
+                                var buffer = Encoding.ASCII.GetBytes(sr.ReadToEnd());
+                                resp = new HttpResponse(response.ResponseUri.AbsoluteUri, response.Headers, Convert.ToInt32(response.StatusCode), buffer);
+                            }
+                        }
                     }
-                    byte[] responseBody = buffer;
-
-                    int status = Convert.ToInt32(response.StatusCode);
-                    string url = response.ResponseUri.AbsoluteUri;
-                    WebHeaderCollection headers = response.Headers;
-                    return new HttpResponse(url, headers, status, responseBody);
-                }
+                    break;
+                default:
+                    throw ex;
             }
+            return resp;
         }
 
         /// <summary>
@@ -318,7 +345,8 @@ namespace smsghapi_dotnet_v2.Smsgh
         {
             // Open the output stream to write onto it
             Stream outputStream = RequestHandler.OpenOutput(urlConnection);
-            if (outputStream != null) {
+            if (outputStream != null)
+            {
                 RequestHandler.WriteStream(outputStream, content);
                 outputStream.Close();
             }
@@ -502,4 +530,5 @@ namespace smsghapi_dotnet_v2.Smsgh
 
         #endregion
     }
+
 }
