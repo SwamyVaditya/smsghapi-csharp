@@ -24,7 +24,7 @@ namespace smsghapi_dotnet_v2.Smsgh
         /// <summary>
         ///     Initializes a new instance of the <see cref="Campaign" /> class.
         /// </summary>
-        public Campaign() {}
+        public Campaign() {} 
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Campaign" />

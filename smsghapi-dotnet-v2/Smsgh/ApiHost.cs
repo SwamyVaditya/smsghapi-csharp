@@ -1,7 +1,7 @@
 ﻿namespace smsghapi_dotnet_v2.Smsgh
 {
     /// <summary>
-    ///     Wrapper that sets API EndPoint.
+    ///     Wrapper that sets API EndPoints.
     /// </summary>
     public class ApiHost
     {

@@ -52,12 +52,25 @@
     <Compile Include="Smsgh\AbstractApi.cs" />
     <Compile Include="Smsgh\AbstractRestClient.cs" />
     <Compile Include="Smsgh\AccountApi.cs" />
+    <Compile Include="Smsgh\AccountBasedRequest.cs" />
     <Compile Include="Smsgh\AccountContact.cs" />
     <Compile Include="Smsgh\AccountProfile.cs" />
     <Compile Include="Smsgh\Action.cs" />
+    <Compile Include="Smsgh\AirtimeRequest.cs" />
     <Compile Include="Smsgh\ApiHost.cs" />
     <Compile Include="Smsgh\ApiList.cs" />
     <Compile Include="Smsgh\BasicAuth.cs" />
+    <Compile Include="Smsgh\Bill.cs" />
+    <Compile Include="Smsgh\BrokerAccountBalance.cs" />
+    <Compile Include="Smsgh\BrokerApi.cs" />
+    <Compile Include="Smsgh\BrokerApiTest.cs" />
+    <Compile Include="Smsgh\BrokerDeviceRequest.cs" />
+    <Compile Include="Smsgh\BrokerMetadata.cs" />
+    <Compile Include="Smsgh\BrokerRequestCommon.cs" />
+    <Compile Include="Smsgh\BrokerResponse.cs" />
+    <Compile Include="Smsgh\BrokerService.cs" />
+    <Compile Include="Smsgh\BrokerServiceResponse.cs" />
+    <Compile Include="Smsgh\CamelcaseContractResolver.cs" />
     <Compile Include="Smsgh\Campaign.cs" />
     <Compile Include="Smsgh\ChildAccount.cs" />
     <Compile Include="Smsgh\Contact.cs" />
@@ -70,8 +83,22 @@
     <Compile Include="Smsgh\ContentLibrary.cs" />
     <Compile Include="Smsgh\ContentMedia.cs" />
     <Compile Include="Smsgh\ContentMediaFile.cs" />
+    <Compile Include="Smsgh\DstvAccountInfo.cs" />
+    <Compile Include="Smsgh\DstvRequest.cs" />
+    <Compile Include="Smsgh\EcgAccountDetail.cs" />
+    <Compile Include="Smsgh\EcgRequest.cs" />
     <Compile Include="Smsgh\FileExtensionMimeTypeMapping.cs" />
+    <Compile Include="Smsgh\GhMobileNetworkId.cs" />
+    <Compile Include="Smsgh\HttpFile.cs" />
+    <Compile Include="Smsgh\HttpFileUploader.cs" />
+    <Compile Include="Smsgh\HttpRequestEventArgs.cs" />
+    <Compile Include="Smsgh\HttpRequestExceptionEventArgs.cs" />
+    <Compile Include="Smsgh\HttpRequestHandler.cs" />
+    <Compile Include="Smsgh\HttpResponseEventArgs.cs" />
     <Compile Include="Smsgh\HttpUploadHelper.cs" />
+    <Compile Include="Smsgh\HttpWebRequestAsyncState.cs" />
+    <Compile Include="Smsgh\HttpWebResponseAsyncState.cs" />
+    <Compile Include="Smsgh\HubtellAccountDetail.cs" />
     <Compile Include="Smsgh\MediaInfo.cs" />
     <Compile Include="Smsgh\IAuth.cs" />
     <Compile Include="Smsgh\Invoice.cs" />
@@ -79,6 +106,7 @@
     <Compile Include="Smsgh\MessageResponse.cs" />
     <Compile Include="Smsgh\MessagingApi.cs" />
     <Compile Include="Smsgh\MimePart.cs" />
+    <Compile Include="Smsgh\MobileMoneyTransferRequest.cs" />
     <Compile Include="Smsgh\MoKeyWord.cs" />
     <Compile Include="Smsgh\NumberPlan.cs" />
     <Compile Include="Smsgh\NumberPlanItem.cs" />
@@ -90,7 +118,9 @@
     <Compile Include="Smsgh\MessageTemplate.cs" />
     <Compile Include="Smsgh\StreamMimePart.cs" />
     <Compile Include="Smsgh\StringMimePart.cs" />
+    <Compile Include="Smsgh\SuflinePlusBundleDetail.cs" />
     <Compile Include="Smsgh\SupportApi.cs" />
+    <Compile Include="Smsgh\SurflineDetails.cs" />
     <Compile Include="Smsgh\Tag.cs" />
     <Compile Include="Smsgh\Ticket.cs" />
     <Compile Include="Smsgh\TicketResponse.cs" />
@@ -112,6 +142,8 @@
     <Compile Include="Smsgh\Topup.cs" />
     <Compile Include="Smsgh\TopupLocation.cs" />
     <Compile Include="Smsgh\UploadFile.cs" />
+    <Compile Include="Smsgh\VodafoneAccountDetails.cs" />
+    <Compile Include="Smsgh\VodafoneRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

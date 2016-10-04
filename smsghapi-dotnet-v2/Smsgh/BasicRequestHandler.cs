@@ -41,7 +41,7 @@ namespace smsghapi_dotnet_v2.Smsgh
             var uri = new Uri(url);
             //HttpWebRequest urlConnection = WebRequest.CreateHttp(uri);
             var urlConnection = WebRequest.Create(uri) as HttpWebRequest;
-            if (urlConnection == null) throw new WebException("Cannot Initialize the Http request");
+            if (urlConnection == null) throw new WebException("Cannot Initialize the Http request", WebExceptionStatus.ConnectFailure);
             return urlConnection;
         }
 

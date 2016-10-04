@@ -23,6 +23,27 @@ namespace smsghapi_dotnet_v2.Smsgh
             }
         }
 
+        /// <summary>
+        /// Constructor used to set that a response is not received from the server
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="status"></param>
+        public HttpResponse(string url, int status)
+        {
+            Url = url;
+            Status = status;
+            Body = null;
+            Headers = null;
+        }
+
+
+        /// <summary>
+        /// Constructor used to set that a response is not received from the server
+        /// </summary>
+        public HttpResponse() : this(string.Empty, -1)
+        {
+
+        }
 
         /// <summary>
         ///     Constructor
