@@ -182,6 +182,9 @@ The SDK currently is organized around four main classes:
                 {
                     Console.WriteLine("Exception e : "+e.Message);
                 }
+
+            Console.ReadKey();
+
         }
 }
 ```

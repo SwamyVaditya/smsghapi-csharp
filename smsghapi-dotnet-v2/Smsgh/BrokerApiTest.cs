@@ -9,7 +9,7 @@ namespace smsghapi_dotnet_v2.Smsgh
     {
 
         
-        public void Demo()
+        public void TestAll()
         {
          
             const bool securedConnection = true;
