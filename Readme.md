@@ -34,6 +34,8 @@ The SDK currently is organized around four main classes:
         It helps any developer to interact with our support platform via his application.
 * *ContentApi.cs* :
 		It handles all content related tasks.
+* *BrokerApi.php* : 
+        It handles all Broker API, this includes Airtime Purchases, Payment of Internet Bundles, Utility Bill payment 
 
 ## **Some Quick Start**
 
@@ -144,7 +146,41 @@ The SDK currently is organized around four main classes:
 ```
 
 *Please do explore the AccountApi class for more functionalities.*
+* **Broker API Demo**
+```c#
+  
+            const bool securedConnection = true;
 
+            const string clientId = "clientId"; //clientId
+            const string clientSecret = "secreteKey"; //secreteKey
+            const string apiToken = "broker-api-token-goes-here"; //Your api Token
+            const string hostname = "api.smsgh.com";
+            const string contextPath = "usp/test"; // change to fit when performing live transactions
+            
+                var host = new ApiHost {
+                    SecuredConnection = securedConnection,
+                    ContextPath = contextPath,
+                    EnabledConsoleLog = true,
+                    Hostname = hostname,
+                    Auth = new BasicAuth(clientId, clientSecret)};
+                var brokerClient = new BrokerApi(host,apiToken);
+            try
+            {
+                var response = brokerClient.BuyAirtime("23325500010", AirtimeNetwork.Mtn, 25, "");
+
+                //If it fails
+                if (!response.Successful)
+                {
+                   var error =  response.ErrorMessage; //Get what when wrong
+                }
+            
+            }
+            catch (Exception e)
+                {
+                    Console.WriteLine("Exception e : "+e.Message);
+                }
+                
+```
 
 * **Notes**
 
