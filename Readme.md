@@ -148,7 +148,10 @@ The SDK currently is organized around four main classes:
 *Please do explore the AccountApi class for more functionalities.*
 * **Broker API Demo**
 ```c#
-  
+  public class Demo
+    {
+        public static void Main(string[] args)
+        {
             const bool securedConnection = true;
 
             const string clientId = "clientId"; //clientId
@@ -179,7 +182,8 @@ The SDK currently is organized around four main classes:
                 {
                     Console.WriteLine("Exception e : "+e.Message);
                 }
-                
+        }
+}
 ```
 
 * **Notes**
