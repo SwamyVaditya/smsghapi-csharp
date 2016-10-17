@@ -5,7 +5,7 @@ using System.Text;
 
 namespace smsghapi_dotnet_v2.Smsgh
 {
-    class VodafoneRequest : BrokerRequestCommon
+    public class VodafoneRequest : BrokerRequestCommon
     {
         public string Service { get; set; }
         public string Account { get; set; }
