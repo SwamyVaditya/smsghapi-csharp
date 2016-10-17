@@ -349,7 +349,7 @@ namespace smsghapi_dotnet_v2.Smsgh
         /// </summary>
         /// <param name="vodafoneRequest">Must be valid instance of VodafoneRequest Object and not null</param>
         /// <returns>An instance of BrokerResponse</returns>
-        private BrokerResponse PayVodafoneBill(VodafoneRequest vodafoneRequest)
+        public BrokerResponse PayVodafoneBill(VodafoneRequest vodafoneRequest)
         {
             var resource = string.Format("/{0}/", "vodafone");
             return SendPostBrokerRequest(resource, vodafoneRequest);
@@ -363,7 +363,7 @@ namespace smsghapi_dotnet_v2.Smsgh
         /// <param name="service">Must be valid Vodafone Service eg postpaid</param>
         /// <param name="foreignId">The foreign Id</param>
         /// <returns>An instance of BrokerResponse</returns>
-        private BrokerResponse PayVodafoneBill(string account,  double amount, string service, string foreignId)
+        public BrokerResponse PayVodafoneBill(string account,  double amount, string service, string foreignId)
         {
             var request = new VodafoneRequest
             {
